@@ -15,6 +15,15 @@ app.get('/abc', (req, res) => {
     },
   ]);
 });
+app.get('/pokemons/id', (req,res) =>{
+return res.status(200).json([])
+});
+
+app.post('', (req,res)=> {
+  res.status(201).json([])
+});
+
+
 
 app.listen(3000) 
 
