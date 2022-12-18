@@ -2,6 +2,7 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 const app = express();
+app.use(express.json());
 
 app.get('/abc', (req, res) => {
     
@@ -16,7 +17,7 @@ app.get('/abc', (req, res) => {
     },
   ]);
 });
-app.get('/pokemons/id', async(req,res) =>{
+app.get('/pokemons', async(req,res) =>{
   const pokemons = await prisma.pokemon.findMany()
 return res.status(200).json(pokemons)
 });
