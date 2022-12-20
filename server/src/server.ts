@@ -1,11 +1,10 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
 app.get('/abc', (req, res) => {
-    
   return res.json([
     {
       id: 1,
@@ -17,16 +16,23 @@ app.get('/abc', (req, res) => {
     },
   ]);
 });
-app.get('/pokemons', async(req,res) =>{
-  const pokemons = await prisma.pokemon.findMany()
-return res.status(200).json(pokemons)
+app.get('/pokemons', async (req, res) => {
+  const pokemons = await prisma.pokemon.findMany();
+  return res.status(200).json(pokemons);
 });
 
-app.post('/register', (req,res)=> {
-  res.status(201).json([])
+app.post('/register/:id/pokemon', async (req, res) => {
+  const id = req.params.id;
+  const body: any = req.body;
+  const pokemom = await prisma.pokemon.create({
+    data: {
+      id,
+      name:body.name,
+      numberPokedex:body.numberPokedex,
+      img: body.img
+    },
+  });
+  res.status(201).json(pokemom);
 });
 
-
-
-app.listen(3000) 
-
+app.listen(3000);

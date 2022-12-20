@@ -13,6 +13,6 @@ datasource db {
 model Pokemon{
   id String @id @default(uuid())
   name String
-  numberPokedex Decimal
+  numberPokedex Int
   img String
 }
