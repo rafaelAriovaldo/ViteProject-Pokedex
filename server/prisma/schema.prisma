@@ -10,9 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Pokemon{
-  id String @id @default(uuid())
-  name String
-  numberPokedex Int
-  img String
-}
+model Pokemon {
+  id            String @id @default(uuid())
+  name          String

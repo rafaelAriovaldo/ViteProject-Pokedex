@@ -21,15 +21,13 @@ app.get('/pokemons', async (req, res) => {
   return res.status(200).json(pokemons);
 });
 
-app.post('/register/:id/pokemon', async (req, res) => {
-  const id = req.params.id;
-  const body: any = req.body;
+app.post('/pokemons', async (req, res) => {
+
+  const body = req.body;
   const pokemom = await prisma.pokemon.create({
     data: {
-      id,
-      name:body.name,
-      numberPokedex:body.numberPokedex,
-      img: body.img
+      name: body.name,
+      numberPokedex: body.numberPokedex
     },
   });
   res.status(201).json(pokemom);

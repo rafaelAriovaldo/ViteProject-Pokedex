@@ -1,27 +1,19 @@
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import { useEffect, useState, FormEvent } from "react";
 
-const data = 
 export function Main() {
-    const res = axios.post(`http://localhost:3000/register/${as}/pokemon`,{
 
-    })
- 
+
     return (
         <main>
             <div className=' bg-red-600 w-[1113px] h-[559px] border rounded-2xl justify-center ml-[25rem] mt-[3rem] flex '>
 
-                <form action="/registerPokmeon" method="post" >
+                <form  >
                     <fieldset className=' bg-white w-[997px] h-[522px] border rounded-2xl justify-center ml-[1rem] mt-[2rem] flex '>
 
                         <label className=" grid  items-center  w-[797px] h-[422px]   ">
 
                             <label className="w-[14rem] h-[2rem] bg-gray-300 mt-10 font-inter text-2xl ml-[21rem] flex justify-center rounded-sm ">Cadastro</label>
-                            <label className="font-inter text-xl">
-                                Img:
-                                <input className="bg-zinc-300 w-[35rem] ml-[7rem]  " type="text" name="name" />
-                            </label>
+
 
                             <label className="font-inter text-xl">
                                 Nome:
