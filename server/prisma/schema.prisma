@@ -4,6 +4,9 @@
 generator client {
   provider = "prisma-client-js"
 }
+generator erd {
+  provider = "prisma-erd-generator"
+}
 
 datasource db {
   provider = "sqlite"
@@ -13,6 +16,15 @@ datasource db {
 model Pokemon {
   id            String @id @default(uuid())
   name          String
-  numberPokedex String
+  numberPokedex Int
   img           String
+  team  Team[] 
+}
+
+model Team {
+  id     String @id @default(uuid())
+  members Int 
+  pokemon Pokemon[] 
+  
+
 }

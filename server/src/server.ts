@@ -26,8 +26,9 @@ app.post('/pokemons', async (req, res) => {
   const body = req.body;
   const pokemom = await prisma.pokemon.create({
     data: {
-      name: body.name,
-      numberPokedex: body.numberPokedex
+    name: body.name,
+    numberPokedex: body.numberPokedex,
+    img: body.img
     },
   });
   res.status(201).json(pokemom);
