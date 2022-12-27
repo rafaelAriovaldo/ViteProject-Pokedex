@@ -9,7 +9,7 @@ CREATE TABLE "Pokemon" (
 -- CreateTable
 CREATE TABLE "Team" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "members" INTEGER NOT NULL
+    "teamName" TEXT NOT NULL
 );
 
 -- CreateTable

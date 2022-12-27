@@ -23,7 +23,8 @@ model Pokemon {
 
 model Team {
   id     String @id @default(uuid())
-  members Int 
+ 
+  teamName String
   pokemon Pokemon[] 
   
 
