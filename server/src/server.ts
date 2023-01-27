@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Response,Request } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -39,7 +39,7 @@ app.get('/team', async (req, res) => {
   const team = await prisma.team.findMany();
   return res.status(200).json(team);
 });
-app.post('/pokemons', async (req, res) => {
+app.post('/pokemons', async (req: Request<never, never,{name: string; numberPokedex:number;img:string}, never>, res:Response ) => {
   const body = req.body;
   const pokemom = await prisma.pokemon.create({
     data: {
@@ -50,32 +50,43 @@ app.post('/pokemons', async (req, res) => {
   });
   res.status(201).json(pokemom);
 });
-
-app.post('/team/teamName', async (req, res) => {
-  const body = req.body;
-  const team = await prisma.team.create({
-    data: {
-      teamName: body.teamName,
-    },
-  });
-
-  res.status(201).json(team);
-});
-app.post('/team/create', async (req,res)=>{
-  const body = req.body 
- const teamId = [6]
-  const teamCreated = await prisma.team.create({
-    data:{
-      teamName: body.teamName,
-      pokemon:{
-        
-      }
-  
-    },
-   
-  
-  })
-  res.status(201).json(teamCreated)
+app.post('/team', async(req: Request<never, never,{teamName: string;}, never>, res:Response )=>{
+        const body = req.body;
+        const team = await prisma.team.create({
+          data:{
+            teamName: body.teamName
+          }
+        })
+        res.send().status(201).json(team)
 })
+
+app.post('/team/create/pokemon', async (req: Request<never, never,{teamName: string; pokemon: string[];}, never>, res:Response )=> {
+const {teamName, pokemon} = req.body;
+       interface pokemon {
+        id: number,
+        name: string,
+        numberPokedex: number
+       };
+      const team = await prisma.team.update({
+        where:{
+          id:''
+        },
+        data:{
+          pokemon:{
+            connect:{
+              id: ''
+            },
+            Create:{
+              teamName: ''
+            }
+          }
+        }
+      })
+     
+res.send('ok').status(201).json(team)
+});
+    
+
+
 
 app.listen(3000);

@@ -27,5 +27,4 @@ model Team {
   teamName String
   pokemon Pokemon[] 
   
-
 }
