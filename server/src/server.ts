@@ -1,6 +1,7 @@
 import express, { Response, Request } from 'express';
 import { PrismaClient } from '@prisma/client';
 
+
 const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
@@ -63,9 +64,7 @@ app.post('/team', async (req: Request<never, never, { teamName: string }, never>
   res.status(201).json(teamName);
 });
 
-app.post(
-  '/team/create',
-  async (req: Request<never, never, { teamName: string; pokemons: number[] }, never>, res: Response) => {
+app.post('/team/create',async (req: Request<never, never, { teamName: string; pokemons: number[] }, never>, res: Response) => {
     const { teamName, pokemons } = req.body;
   
     const teamT = await prisma.team.create({
@@ -91,5 +90,27 @@ app.post(
       */
   },
 );
+app.delete(`/pokemon/:id`,  async (req, res)=>{
+const {id} = req.params
+const pokomonDeleted = await prisma.pokemon.delete({
+  where:{
+    id:Number(id)
+  }
+})
+return res.status(200).json(pokomonDeleted)
+});
+
+app.delete(`team/:id`, async(req, res)=>{
+const {id} = req.params
+const teamDeleted = await prisma.team.delete({
+  where:{
+    id:Number(id),
+  },
+
+//not implemented
+ 
+})
+return res.status(200).json(teamDeleted)
+})
 
 app.listen(3000);
