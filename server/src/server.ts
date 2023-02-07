@@ -1,4 +1,4 @@
-import express, { Response,Request } from 'express';
+import express, { Response, Request } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -39,54 +39,57 @@ app.get('/team', async (req, res) => {
   const team = await prisma.team.findMany();
   return res.status(200).json(team);
 });
-app.post('/pokemons', async (req: Request<never, never,{name: string; numberPokedex:number;img:string}, never>, res:Response ) => {
+app.post(
+  '/pokemons',
+  async (req: Request<never, never, { name: string; numberPokedex: number; img: string }, never>, res: Response) => {
+    const body = req.body;
+    const pokemom = await prisma.pokemon.create({
+      data: {
+        name: body.name,
+        numberPokedex: body.numberPokedex,
+        img: body.img,
+      },
+    });
+    res.status(201).json(pokemom);
+  },
+);
+app.post('/team', async (req: Request<never, never, { teamName: string }, never>, res: Response) => {
   const body = req.body;
-  const pokemom = await prisma.pokemon.create({
+  const teamName = await prisma.team.create({
     data: {
-      name: body.name,
-      numberPokedex: body.numberPokedex,
-      img: body.img,
+      teamName: body.teamName,
     },
   });
-  res.status(201).json(pokemom);
+  res.status(201).json(teamName);
 });
-app.post('/team', async(req: Request<never, never,{teamName: string;}, never>, res:Response )=>{
-        const body = req.body;
-        const team = await prisma.team.create({
-          data:{
-            teamName: body.teamName
-          }
-        })
-        res.send().status(201).json(team)
-})
 
-app.post('/team/create/pokemon', async (req: Request<never, never,{teamName: string; pokemon: string[];}, never>, res:Response )=> {
-const {teamName, pokemon} = req.body;
-       interface pokemon {
-        id: number,
-        name: string,
-        numberPokedex: number
-       };
-      const team = await prisma.team.update({
-        where:{
-          id:''
+app.post(
+  '/team/create',
+  async (req: Request<never, never, { teamName: string; pokemons: number[] }, never>, res: Response) => {
+    const { teamName, pokemons } = req.body;
+  
+    const teamT = await prisma.team.create({
+      data: {
+        teamName: teamName,
+        pokemon: {
+          connect: pokemons.map((arr) => {
+            return { id: arr };
+          }),
         },
-        data:{
-          pokemon:{
-            connect:{
-              id: ''
-            },
-            Create:{
-              teamName: ''
-            }
-          }
-        }
-      })
-     
-res.send('ok').status(201).json(team)
-});
+      },
+      include:{
+        pokemon:true
+      }
+    });
+    return res.status(201).json(teamT);
     
-
-
+    /*
+    const arr = pokemons.map((poke) => {
+      return {
+        arr: poke,
+      };
+      */
+  },
+);
 
 app.listen(3000);

@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Pokemon {
-  id            String @id @default(uuid())
+  id            Int @id @default(autoincrement())
   name          String
   numberPokedex Int
   img           String
@@ -22,9 +22,9 @@ model Pokemon {
 }
 
 model Team {
-  id     String @id @default(uuid())
+  id     Int @id @default(autoincrement())
  
-  teamName String
+  teamName String 
   pokemon Pokemon[] 
   
 }

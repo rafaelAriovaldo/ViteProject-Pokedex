@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Pokemon" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "numberPokedex" INTEGER NOT NULL,
     "img" TEXT NOT NULL
@@ -8,15 +8,14 @@ CREATE TABLE "Pokemon" (
 
 -- CreateTable
 CREATE TABLE "Team" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "teamName" TEXT NOT NULL,
-    "teamMembers" TEXT NOT NULL
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "teamName" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "_PokemonToTeam" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL,
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
     CONSTRAINT "_PokemonToTeam_A_fkey" FOREIGN KEY ("A") REFERENCES "Pokemon" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "_PokemonToTeam_B_fkey" FOREIGN KEY ("B") REFERENCES "Team" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
