@@ -83,8 +83,6 @@ app.delete(`/teams/:id`, async (req, res) => {
     where: {
       id: Number(id),
     },
-
-
   });
   return res.status(200).json(teamDeleted);
 });
