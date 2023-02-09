@@ -58,7 +58,6 @@ app.post('/teams', async (req: RequestWithBody<{ teamName: string; pokemons: num
     },
   });
   return res.status(201).json(teamT);
-
   /*
     const arr = pokemons.map((poke) => {
       return {
