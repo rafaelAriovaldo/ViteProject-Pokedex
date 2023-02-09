@@ -11,6 +11,7 @@ app.get('/pokemons', async (req, res) => {
   const pokemons = await prisma.pokemon.findMany();
   return res.status(200).json(pokemons);
 });
+
 app.get('/teams', async (req, res) => {
   const team = await prisma.team.findMany({
     include: {
@@ -65,6 +66,7 @@ app.post('/teams', async (req: RequestWithBody<{ teamName: string; pokemons: num
       };
       */
 });
+
 app.delete(`/pokemon/:id`, async (req, res) => {
   const { id } = req.params;
   const pokomonDeleted = await prisma.pokemon.delete({
