@@ -30,6 +30,12 @@ app.post(
   '/pokemons',
   async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
     const body = req.body;
+
+    if (!body.name && !body.numberPokedex) {
+      return res.status(400).json({
+        error: 'fill in the fields correctly!',
+      }); //important
+    }
     const pokemom = await prisma.pokemon.create({
       data: {
         name: body.name,
@@ -37,13 +43,24 @@ app.post(
         img: body.img,
       },
     });
-    res.status(201).json(pokemom);
+
+    return res.status(201).json(pokemom);
   },
 );
 
 app.post('/teams', async (req: RequestWithBody<{ teamName: string; pokemons: number[] }>, res: Response) => {
   const { teamName, pokemons } = req.body;
 
+  if (pokemons.length > 6) {
+    return res.status(400).json({
+      error: 'Only six pokemons on each team!',
+    });
+  }
+  if (pokemons.length <= 0) {
+    return res.status(400).json({
+      error: 'There must be at least one pokémon on each team!',
+    });
+  }
   const teamT = await prisma.team.create({
     data: {
       teamName: teamName,
