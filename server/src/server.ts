@@ -30,7 +30,34 @@ app.post(
   '/pokemons',
   async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
     const body = req.body;
-
+    const lowerCase = String;
+    const lowerCasePokemon = lowerCase(body.name.toLowerCase());
+    const verifyPokemon = await prisma.pokemon.findMany({
+      select: {
+        name: true,
+        numberPokedex: true,
+      },
+      where: {
+        OR: [
+          {
+            numberPokedex: body.numberPokedex,
+          },
+          {
+            name: lowerCasePokemon,
+          },
+        ],
+      },
+    });
+    if (verifyPokemon.some((pokemom) => pokemom.name === lowerCasePokemon)) {
+      return res.status(400).json({
+        error: 'Pokemon name already registered in the bank!',
+      });
+    }
+    if (verifyPokemon.some((pokemom) => pokemom.numberPokedex === body.numberPokedex)) {
+      return res.status(400).json({
+        error: 'Pokemon number already registered in the bank!',
+      });
+    }
     if (!body.name && !body.numberPokedex) {
       return res.status(400).json({
         error: 'fill in the fields correctly!',
