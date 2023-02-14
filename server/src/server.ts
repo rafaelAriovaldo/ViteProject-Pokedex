@@ -26,9 +26,7 @@ app.get('/teams', async (req, res) => {
   return res.status(200).json(team);
 });
 
-app.post(
-  '/pokemons',
-  async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
+app.post('/pokemons', async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
     const body = req.body;
     const lowerCase = String;
     const lowerCasePokemon = lowerCase(body.name.toLowerCase());
