@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
         element:<HomePage/>,
     },
     {
-        path:"/pokemom/register",
+        path:"/pokemom",
         element:<RegisterPokemonPage/>,
     },
     {

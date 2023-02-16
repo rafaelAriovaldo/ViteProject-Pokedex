@@ -1,9 +1,11 @@
 import express, { Response, Request } from 'express';
 import { PrismaClient } from '@prisma/client';
+var cors = require('cors');
 
 const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 type RequestWithBody<BodyType> = Request<never, never, BodyType, never>;
 
@@ -26,7 +28,9 @@ app.get('/teams', async (req, res) => {
   return res.status(200).json(team);
 });
 
-app.post('/pokemons', async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
+app.post(
+  '/pokemons',
+  async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
     const body = req.body;
     const lowerCase = String;
     const lowerCasePokemon = lowerCase(body.name.toLowerCase());
@@ -128,4 +132,6 @@ app.delete(`/teams/:id`, async (req, res) => {
   return res.status(200).json(teamDeleted);
 });
 
-app.listen(3000);
+app.listen({
+  port: 5000,
+});
