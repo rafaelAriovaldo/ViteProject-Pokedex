@@ -54,11 +54,7 @@ export function Main() {
                                 </input>
                             </label>
 
-                            <label htmlFor="numberPokedex" className="font-inter text-xl">
-                                Img:
-                                <input id="img" name="img" type="text" className="bg-zinc-300  w-[35rem]  ml-2 " >
-                                </input>
-                            </label>
+                         
 
                             <Link to={'/'} className="h-1 w-1 mt-10"><button className=" bg-zinc-300 h-5 w-20 flex justify-center items-center font-inter text-lg hover:bg-zinc-400 rounded-sm ">Voltar</button></Link>
                         </label>

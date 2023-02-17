@@ -7,7 +7,7 @@ export function SearchPage() {
 
             <Containner />
             <MainPage />
-
+            
         </div>
     )
 }

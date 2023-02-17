@@ -30,8 +30,9 @@ app.get('/teams', async (req, res) => {
 
 app.post(
   '/pokemons',
-  async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string }>, res: Response) => {
+  async (req: RequestWithBody<{ name: string; numberPokedex: number; img: string; }>, res: Response) => {
     const body = req.body;
+    
     const lowerCase = String;
     const lowerCasePokemon = lowerCase(body.name.toLowerCase());
     const verifyPokemon = await prisma.pokemon.findMany({
@@ -65,11 +66,22 @@ app.post(
         error: 'fill in the fields correctly!',
       }); //important
     }
+    if(!body.name){
+      return res.status(400).json({
+        error:'fill in the fields correctly!'
+      })
+    };
+    if(!body.numberPokedex){
+      return res.status(400).json({
+        error:'fill in the fields correctly!'
+      })
+    }
+    const pokemonNumber = body.numberPokedex;
     const pokemom = await prisma.pokemon.create({
       data: {
         name: body.name,
         numberPokedex: body.numberPokedex,
-        img: body.img,
+        img:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ pokemonNumber }.png`
       },
     });
 
