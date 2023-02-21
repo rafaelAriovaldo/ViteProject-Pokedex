@@ -33,19 +33,19 @@ export function MainPage() {
                                         img={pokemon.img}
 
                                     />
-                                    
+
                                     </li>
                                 </div>
 
                             )
-                       })
+                        })
 
                     }
                 </ul>
-                
+
             </main>
             <Link to={'/'} className="h-1 w-1 mt-10"><button className=" bg-zinc-300 h-5 w-20 flex justify-center items-center font-inter text-lg hover:bg-zinc-400 rounded-sm  mt-[35rem] ml-[-35rem]">Voltar</button></Link>
         </div>
-        
+
     )
 }
