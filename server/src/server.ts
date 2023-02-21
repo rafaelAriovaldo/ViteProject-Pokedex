@@ -21,6 +21,7 @@ app.get('/teams', async (req, res) => {
         select: {
           name: true,
           numberPokedex: true,
+          img:true
         },
       },
     },
