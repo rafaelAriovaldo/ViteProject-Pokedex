@@ -1,9 +1,11 @@
 import { TeamMain } from "./components/main";
+import { ContainnerTeam } from "./components/containner";
 
-export function TeamPage(){
-    return(
+export function TeamPage() {
+    return (
         <div>
-            <TeamMain/>
+            <ContainnerTeam />
+            <TeamMain />
         </div>
     )
 }

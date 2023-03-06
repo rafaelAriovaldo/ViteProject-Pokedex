@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useState, FormEvent } from 'react';
+import { FormEvent } from 'react';
 
 export function Main() {
 
@@ -13,7 +13,7 @@ export function Main() {
     async function PokemonCreate(event: FormEvent) {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement)
-
+        
         const data = Object.fromEntries(formData);
 
         try {
@@ -24,7 +24,7 @@ export function Main() {
             })
             alert('Pokemon cadastrado com sucesso!')
         } catch (error) {
-            alert('errou de novo miseravi!')
+            alert('error! campos preenchidos de forma incorreta!')
             console.log(data)
         }
     }
