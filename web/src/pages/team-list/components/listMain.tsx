@@ -22,7 +22,7 @@ export function ListMainPage() {
         <div className=' bg-red-600 w-[1113px] h-auto border rounded-2xl justify-center ml-[25rem] mt-[3rem] flex'>
 
             <form className=' bg-white w-[997px] h-auto border rounded-2xl  ml-[1rem] mt-[2rem]  flex '>
-                
+
                 <ul className="flex  flex-wrap  gap-3  ">
 
 

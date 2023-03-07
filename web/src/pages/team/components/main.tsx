@@ -1,4 +1,4 @@
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect, FormEvent } from 'react';
 import { PokemonBox } from "./Pokemonbox";
 import axios from "axios";

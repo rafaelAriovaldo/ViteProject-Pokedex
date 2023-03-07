@@ -2,25 +2,24 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FormEvent } from 'react';
 
+interface Pokemon {
+    name: string,
+    numberPokedex: number,
+    img: string,
+}
+
 export function Main() {
 
-    interface Pokemon {
-        name: string,
-        numberPokedex: number,
-        img: string,
-    }
-   
     async function PokemonCreate(event: FormEvent) {
         event.preventDefault();
         const formData = new FormData(event.target as HTMLFormElement)
-        
+
         const data = Object.fromEntries(formData);
 
         try {
             const response = await axios.post(`http://localhost:5000/pokemons`, {
-                "name": data.name,
-                "numberPokedex": Number(data.numberPokedex),
-                "img": data.img,
+                name: data.name,
+                numberPokedex: Number(data.numberPokedex),
             })
             alert('Pokemon cadastrado com sucesso!')
         } catch (error) {
@@ -29,7 +28,6 @@ export function Main() {
         }
     }
     return (
-
 
         <main>
             <div className=' bg-red-600 w-[1113px] h-[559px] border rounded-2xl justify-center ml-[25rem] mt-[3rem] flex '>
@@ -54,7 +52,7 @@ export function Main() {
                                 </input>
                             </label>
 
-                         
+
 
                             <Link to={'/'} className="h-1 w-1 mt-10"><button className=" bg-zinc-300 h-5 w-20 flex justify-center items-center font-inter text-lg hover:bg-zinc-400 rounded-sm ">Voltar</button></Link>
                         </label>
